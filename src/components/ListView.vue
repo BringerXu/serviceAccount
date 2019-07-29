@@ -16,17 +16,6 @@
             </el-container>
         </el-card>
     </div>
-    <el-dialog
-    title="提示"
-    :visible.sync="dialogVisible"
-    width="30%"
-    :before-close="handleClose">
-        <span>这是一段信息</span>
-        <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
-    </el-dialog>
 </div>
 </template>
 
@@ -35,13 +24,12 @@ export default {
     name:"listview",
     data(){
         return {
-            dialogVisible: false,
             items:[
                 {
-                    "name":"sdfsf"
+                    "name":"shenggangwu"
                     },
                     {
-                        "name":"sdfsdf"
+                        "name":"zhengyixu"
                     }
                 ]
         }
@@ -49,18 +37,7 @@ export default {
     methods:{
         handleCardClick(index){
             this.dialogVisible = true;
-        },
-
-        handleDialogData(){
-
-        },
-        handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-          }
+        }
     }
 }
 </script>
@@ -69,7 +46,7 @@ export default {
 .el-card__body{
     padding:5px;
     margin-bottom: 1px;
-    box-shadow: 10px 0px 0px black;
+    box-shadow: 0px 10px 5px #888888;
     text-align: left;
     vertical-align: middle;
 }
@@ -94,8 +71,5 @@ export default {
 #itemName{
     position:absolute;
     transform:translate(0,50%);
-}
-
-.el-dialog{
 }
 </style>
