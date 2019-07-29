@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <ListView/>
+    <router-view>
+    </router-view>
   </div>
 </template>
 
 <script>
-import ListView from '@/components/ListView.vue'
 export default {
   name: 'app',
-  components: {
-    ListView
+  mounted(){
+    this.$router.push({name:'index'})
   }
 }
 </script>

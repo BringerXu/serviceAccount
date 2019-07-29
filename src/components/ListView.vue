@@ -36,7 +36,9 @@ export default {
     },
     methods:{
         handleCardClick(index){
-            this.dialogVisible = true;
+            window.console.log(index);
+            window.console.log(this.items[index].name);
+            this.$router.push({name:'user', params: {name:this.items[index].name}});
         }
     }
 }
