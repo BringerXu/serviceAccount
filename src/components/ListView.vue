@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
 export default {
     name:"listview",
     data(){
@@ -48,19 +47,28 @@ export default {
                     },
                     {
                         "name":"pest"
+                    },
+                    {
+                        "name":"yisong"
+                    },
+                    {
+                        "name":"zhiweilu"
                     }
                 ]
         }
     },
     methods:{
         handleCardClick(index){
-            setTimeout(200);
             this.$router.push({name:'user', params: {name:this.items[index].name}});
         }
     }
 }
 </script>
 <style>
+.weui-cells {
+    margin-top: 0px !important;    
+}
+
 .weui-cell__bd {
     text-align: left;
     margin-left: 20px;
