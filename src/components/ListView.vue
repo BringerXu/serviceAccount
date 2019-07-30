@@ -65,8 +65,4 @@ export default {
     text-align: left;
     margin-left: 20px;
 }
-a:active{
-    color: red;
-}
-
 </style>
