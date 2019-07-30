@@ -1,31 +1,24 @@
 <template>
     <div id="UserPage">
-        
+        {{this.name}}
     </div>
 </template>
 
 <script>
 export default {
     name:"userPage",
-    mounted()
-    {
-        this.$weui.dialog({
-            title: '提示',
-            content: '是否领取礼品',
-            buttons: [{
-            label: '取消',
-            type: 'default',
-            onClick: () => {
-                alert('您已取消领取礼品！')
-            }
-            }, {
-                label: '确定',
-                type: 'primary',
-                onClick: () => {
-                    alert('您已确定领取礼品！')
-                }
-            }]
-        })
+    data(){
+        return {
+            name:""
+        }
+    },
+    created(){
+        this.getRouterData();
+    },
+    methods:{
+        getRouterData(){
+            this.name = this.$route.params.name;
+        }
     }
 }
 </script>
