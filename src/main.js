@@ -4,9 +4,11 @@ import router from './router'
 import './plugins/element.js'
 import 'weui'
 import weui from 'weui.js'
+import wx from 'weixin-js-sdk'
 
 Vue.config.productionTip = false
 Vue.prototype.$weui = weui
+Vue.prototype.$wx = wx
 
 new Vue({
   router,

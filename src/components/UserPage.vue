@@ -24,6 +24,7 @@
 
 <script>
 import DatePicker from './DatePicker.vue'
+import { setTimeout } from 'timers';
 export default {
     name:"userPage",
     components:{
@@ -50,6 +51,9 @@ export default {
         this.size = ww*0.8;
         // 请求获得是否已授权
     },
+    beforeDestroy(){
+
+    },
     methods:{
         getRouterData(){
             this.name = this.$route.params.name;
@@ -58,7 +62,9 @@ export default {
             this.authDate = data;
         },
         submitAuth(){
-            window.close();
+            let vuetemp = this;
+            this.statusIcon = "weui-icon-success weui-icon_msg";
+            setTimeout(function(){vuetemp.$router.push("/");}, 300);
         }
     }
 }
@@ -81,7 +87,6 @@ export default {
 }
 
 .botBar{
-    /* position: absolute !important;  */
     box-sizing: border-box;
     position: absolute;
     bottom: 0px;

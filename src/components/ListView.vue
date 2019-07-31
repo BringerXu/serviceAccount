@@ -66,7 +66,7 @@ export default {
 </script>
 <style>
 .weui-cells {
-    margin-top: 0px !important;    
+    margin-top: 0px !important;  
 }
 
 .weui-cell__bd {

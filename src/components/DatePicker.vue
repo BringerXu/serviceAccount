@@ -84,6 +84,5 @@
 <style>
 #dataPicker > div > a{
   font-size: 20px;
-  /* margin: 0px; */
 }
 </style>

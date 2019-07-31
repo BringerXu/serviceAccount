@@ -12,6 +12,7 @@
     "element-ui": "^2.4.5",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
+    "weixin-js-sdk": "^1.4.0-test",
     "weui": "^2.0.1",
     "weui.js": "^1.2.1"
   },
