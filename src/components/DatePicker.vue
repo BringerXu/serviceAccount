@@ -1,8 +1,44 @@
 <template>
-  <div>
-    <el-button id="showDatePicker" @click="handleDatePicker">{{authTime.year}}年{{authTime.month}}月{{authTime.date}}日</el-button>
-    <!-- <a href="javascript:;" class="weui-cell" ></a> -->
-    
+  <div tapmode id="dataPicker">
+    <div>
+      <a href="javascript:;" class='weui-btn weui-btn_default setAuthtimeBtn' tapmode @click="openActionsheet()">授权设置</a>
+    </div>
+    <!--BEGIN actionSheet-->
+    <div>
+    <div class="weui-mask" id="iosMask" style="opacity: 0; display: none;"></div>
+    <div :class=Toggle id="iosActionsheet">
+      <!--  Toggle: weui-actionsheet_toggle -->
+        <div class="weui-actionsheet__title">
+            <p class="weui-actionsheet__title-text">授权时间</p>
+        </div>
+        <div class="weui-actionsheet__menu">
+            <div class="weui-actionsheet__cell" @click="handlePickDays(1)">一天</div>
+            <div class="weui-actionsheet__cell" @click="handlePickDays(3)">三天</div>
+            <div class="weui-actionsheet__cell" @click="handlePickDays(5)">五天</div>
+            <div class="weui-actionsheet__cell" style="text-align:left">
+              <div class="weui-flex">
+                <div class="weui-flex__item">
+                  <input class="weui-input" dir="rtl" type="number" v-model="inputAuthday"/>
+                </div>
+                <div class="weui-flex__item">
+                  天
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="weui-actionsheet__action">
+            <div class="weui-flex">
+              <div class="weui-flex__item">
+                <div class="weui-actionsheet__cell" @click="submitActionsheet()">确认</div>
+              </div>
+              <div class="weui-flex__item">
+                <div class="weui-actionsheet__cell" @click="closeActionsheet()">取消</div>
+              </div>
+            </div> 
+        </div>
+    </div>
+    </div>
+    <!--END actionSheet-->
   </div>
 </template>
 
@@ -10,73 +46,44 @@
   export default{
     data(){
       return {
-        nowTime:{
-          year:"",
-          month:"",
-          date:""
-        },
-        authTime:{
-          year:"",
-          month:"",
-          date:""
-        },
-        warnflag:"flag"
+        Toggle:"weui-actionsheet",
+        inputAuthday:null,
+        authDays:0
       }
     },
     methods:{
-      handleDatePicker(){
-        let vuetemp = this;
-        this.$weui.datePicker({
-            start: new Date().getFullYear(),
-            end: new Date().getFullYear()+1,
-            // onChange: function (result) {
-            //     window.console.log(result);
-            // },
-            onConfirm: function (result) {
-              vuetemp.verifyAuthTime(result);
-                // this.$emit("sendAuthDate",result)
-            },
-            title: '选择授权到期时间'});
+      handlePickDays(days){
+        this.authDays = days;
       },
-      verifyAuthTime(objects){
-        let y = objects[0];
-        let m = objects[1];
-        let d = objects[2];
-        if(y.value >= this.nowTime.year && m.value >= this.nowTime.month && d.value >= this.nowTime.date){
-          this.authTime.year = y.value;
-          this.authTime.month = m.value;
-          this.authTime.date = d.value;
-        } else {
-          //弹出警告
-          this.warnflag = true;
+      openActionsheet(){
+        // let iosMask = document.getElementById("iosMask");
+        // iosMask.fadeOut(200);
+        this.authDays = 0;
+        this.inputAuthday = null;
+        this.Toggle = "weui-actionsheet weui-actionsheet_toggle";
+      },
+      closeActionsheet(){
+        // let iosMask = document.getElementById("iosMask");
+        // iosMask.fadeIn(200);
+        this.authDays = 0;
+        this.inputAuthday = null;
+        this.Toggle = "weui-actionsheet";
+      },
+      submitActionsheet(){
+        if(this.inputAuthday!=null){
+          this.authDays = this.inputAuthday;
         }
-      },
-      
-      timeFormate(timeStamp) {
-        // let hh =new Date(timeStamp).getHours() < 10? "0" + new Date(timeStamp).getHours(): new Date(timeStamp).getHours();
-        // let mm =new Date(timeStamp).getMinutes() < 10? "0" + new Date(timeStamp).getMinutes(): new Date(timeStamp).getMinutes();
-        this.nowTime.year = new Date(timeStamp).getFullYear();
-        this.nowTime.month = new Date(timeStamp).getMonth() + 1 < 10? "0" + (new Date(timeStamp).getMonth() + 1): new Date(timeStamp).getMonth() + 1;
-        this.nowTime.date = new Date(timeStamp).getDate() < 10? "0" + new Date(timeStamp).getDate(): new Date(timeStamp).getDate();
-        this.authTime.year = this.nowTime.year;
-        this.authTime.month = this.nowTime.month;
-        this.authTime.date = this.nowTime.date;
-      },
-      
-      nowTimes(){
-        this.timeFormate(new Date());
-      },
+        this.Toggle = "weui-actionsheet";
+        this.$emit('sendAuthDate', this.authDays)
+      }
     },
     mounted(){
-      this.nowTimes()
     }
   }
 </script>
-
 <style>
-.weui-cell{
-  padding: 0px;
-  margin: 0px;
-  margin-right: 2px;
+#dataPicker > div > a{
+  font-size: 20px;
+  /* margin: 0px; */
 }
 </style>

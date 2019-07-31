@@ -6,7 +6,19 @@
         <div>
             <span class="pageTitle">{{this.name}}</span>
         </div>
+        <div class="icon-box">
+            <i :class="statusIcon"></i>
+            <div class="icon-box__ctn">
+                <h3 class="icon-box__title">未授权</h3>
+                <!-- <p class="icon-box__desc">用于表示操作顺利达成</p> -->
+            </div>
+        </div>
         <DatePicker v-if="authflag" v-on:sendAuthDate="getAuthDate"/>
+            <div class="weui-flex botBar">
+                <div class="weui-flex__item">
+                <div class="weui-btn weui-btn_primary" @click="submitAuth()">提交</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -22,8 +34,10 @@ export default {
             name:"",
             authDate:"",
             authflag:true,
-            size:0,
-            
+            size:200,
+            // weui-icon-warn weui-icon_msg 警告标志
+            // weui-icon-success weui-icon_msg 成功标志
+            statusIcon:"weui-icon-warn weui-icon_msg",
             // 失效 选择时间段隐藏
             // 授权
         }
@@ -34,13 +48,17 @@ export default {
     mounted(){
         let ww = window.innerWidth;
         this.size = ww*0.8;
+        // 请求获得是否已授权
     },
     methods:{
         getRouterData(){
             this.name = this.$route.params.name;
         },
         getAuthDate(data){
-            window.console.log(data);
+            this.authDate = data;
+        },
+        submitAuth(){
+            window.close();
         }
     }
 }
@@ -50,16 +68,9 @@ export default {
 #UserPage{
     height:100%;
 }
-.weui-tabbar{
-    position:absolute;
-    /* top: 150px; */
-    bottom:0px;
-    left:0px;
-    right:0px;
-}
 
 #UserPage .el-avatar{
-    margin-top: 10px;
+    margin-top: 25px;
 }
 .img{
     width:100%;
@@ -67,5 +78,18 @@ export default {
 .pageTitle{
     font-size: 30px;
     font-weight: 600;
+}
+
+.botBar{
+    /* position: absolute !important;  */
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px;
+    background-color: #3A3A3A;
 }
 </style>
