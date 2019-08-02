@@ -6,6 +6,7 @@ import './plugins/element.js'
 import 'weui'
 import weui from 'weui.js'
 import wx from 'weixin-js-sdk'
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 Vue.config.productionTip = false
 Vue.prototype.$weui = weui
