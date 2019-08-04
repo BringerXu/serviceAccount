@@ -64,9 +64,9 @@ export default {
             this.authDate = data;
         },
         submitAuth(){
-            // let vuetemp = this;
+            let vuetemp = this;
             this.statusIcon = "weui-icon-success weui-icon_msg";
-            // setTimeout(function(){vuetemp.$router.push("/");}, 300);
+            setTimeout(function(){vuetemp.$router.push("/");}, 200);
         }
     }
 }
